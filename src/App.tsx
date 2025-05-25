@@ -27,6 +27,7 @@ import Returns from "./pages/Returns";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import Support from "./pages/Support";
+import CookiePolicy from "./pages/CookiePolicy";
 
 const queryClient = new QueryClient();
 
@@ -60,6 +61,7 @@ const App = () => (
                   <Route path="/privacy" element={<Privacy />} />
                   <Route path="/terms" element={<Terms />} />
                   <Route path="/support" element={<Support />} />
+                  <Route path="/cookie-policy" element={<CookiePolicy />} />
                   <Route path="*" element={<NotFound />} />
                 </Routes>
               </main>
