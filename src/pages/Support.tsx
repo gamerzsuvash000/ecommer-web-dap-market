@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { MessageCircle, Phone, Mail, Clock, Search, HelpCircle } from 'lucide-react';
+import { MessageCircle, Phone, Mail, Clock, Search, HelpCircle, Package, RotateCcw, CreditCard, User } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { Textarea } from '../components/ui/textarea';
