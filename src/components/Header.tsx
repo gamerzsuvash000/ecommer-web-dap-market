@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ShoppingCart, User, Search, LogIn } from 'lucide-react';
+import { ShoppingCart, User, Search, LogIn, Moon, Sun } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { useCart } from '../contexts/CartContext';
 import { Button } from './ui/button';
@@ -11,6 +11,7 @@ const Header = () => {
   const { user, logout } = useAuth();
   const { totalItems } = useCart();
   const [searchQuery, setSearchQuery] = useState('');
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -18,14 +19,20 @@ const Header = () => {
     console.log('Searching for:', searchQuery);
   };
 
+  const toggleDarkMode = () => {
+    setIsDarkMode(!isDarkMode);
+    // Toggle dark class on document element
+    document.documentElement.classList.toggle('dark');
+  };
+
   return (
-    <header className="bg-white shadow-sm border-b sticky top-0 z-50">
+    <header className="bg-white dark:bg-gray-900 shadow-sm border-b sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
             <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg"></div>
-            <span className="text-xl font-bold text-gray-900">Dap Market</span>
+            <span className="text-xl font-bold text-gray-900 dark:text-white">Dap Market</span>
           </Link>
 
           {/* Search Bar */}
@@ -44,9 +51,23 @@ const Header = () => {
 
           {/* Navigation */}
           <nav className="flex items-center space-x-4">
+            {/* Dark Mode Toggle */}
+            <Button 
+              variant="ghost" 
+              size="sm" 
+              onClick={toggleDarkMode}
+              className="p-2"
+            >
+              {isDarkMode ? (
+                <Sun className="h-4 w-4" />
+              ) : (
+                <Moon className="h-4 w-4" />
+              )}
+            </Button>
+
             {user ? (
               <div className="flex items-center space-x-4">
-                <span className="text-sm text-gray-700">Hi, {user.name}!</span>
+                <span className="text-sm text-gray-700 dark:text-gray-300">Hi, {user.name}!</span>
                 {user.isAdmin && (
                   <Link to="/admin">
                     <Button variant="outline" size="sm">
